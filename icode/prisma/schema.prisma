@@ -12,3 +12,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model User {
+  id  Int  @id @default(autoincrement())
+  email  String  @unique
+  name  String  @unique
+  password String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum List {
+  Hobby
+  Travel
+  Food_and_Beverage
+  Home_and_decor
+  Soccer
+  Volleyball
+  Computer
+  Phone
+  Billbord_chart
+}
+
+model Title {
+  id  Int @id @default(autoincrement())
+  title List
+  posts Post[] @relation("Category")
+  categories Category[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id  Int  @id @default(autoincrement())
+  image String  @db.VarChar(255)
+  title String @unique
+  content String
+  titles Title[] @relation("Category")
+  categories Category[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  titleId Int
+  postId Int 
+  title Title @relation(fields: [titleId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+  @@id([titleId, postId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

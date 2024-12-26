@@ -3,67 +3,119 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const createRecord = {
-  createPost: async (req: Request, res: Response) => {
+export class DemoController {
+  static readUser = async (req: Request, res: Response): Promise<void> => {
     try {
-      const record = await prisma.record.create({
-        data: req.body,
+      const record = await prisma.user.findMany();
+      res.status(200).json(record);
+    } catch (error) {
+      res.status(404).json({ error: error });
+    }
+  };
+
+  static findUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const record = await prisma.user.findFirstOrThrow({
+        where: { id: Number(id) },
       });
-      res.json(record);
+      if (!record) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+      res.status(200).json(record);
     } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: error });
     }
-  },
-};
+  };
 
-export const readRecord = {
-  readPost: async (req: Request, res: Response) => {
+  static createUser = async (req: Request, res: Response): Promise<void> => {
     try {
-      const record = await prisma.record.findMany();
-      res.json(record);
-    } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
-    }
-  },
-};
+      const { email, name, password } = req.body;
 
-export const filterRecord = {
-  filterPost: async (req: Request, res: Response) => {
-    try {
-      const record = await prisma.record.findOne({
-        where: req.body,
+      if (!email || !name || !password) {
+        res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const record = await prisma.user.create({
+        data: {
+          email,
+          name,
+          password,
+        },
       });
-      res.json(record);
-    } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
-    }
-  },
-};
 
-export const updateRecord = {
-  updatePost: async (req: Request, res: Response) => {
+      res.status(201).json(record);
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  };
+
+  static updateProfile = async (req: Request, res: Response): Promise<void> => {
     try {
-      const record = await prisma.record.update({
-        where: { id: req.params.id },
-        data: req.body,
+      const { name, email, password } = req.body;
+
+      if (!name) {
+        res.status(400).json({ error: "Name is required" });
+        return;
+      }
+      const data: any = {};
+      if (email) data.email = email;
+      if (name) data.name = name;
+      if (password) data.password = password;
+      const record = await prisma.user.update({
+        where: { name: String(name) },
+        data: data,
       });
-      res.json(record);
+      res.status(200).json(record);
     } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: error });
     }
-  },
-};
+  };
 
-
-export const deleteRecord = {
-  deletePost: async (req: Request, res: Response) => {
+  static createTitle = async (req: Request, res: Response): Promise<void> => {
     try {
-      const record = await prisma.record.delete({
-        where: { id: req.params.id },
+      const { title } = req.body;
+      if (!title) {
+        res.status(400).json({ error: "Missing required fields" });
+      }
+      const record = await prisma.title.create({
+        data: {
+          title,
+        },
       });
-      res.json(record);
+      res.status(201).json(record);
     } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: error });
     }
-  },
-};
+  };
+
+  static createPost = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { image, title, content } = req.body;
+
+      if (!image || !title || !content) {
+        res.status(400).json({ error: "Missing required fields" });
+      }
+
+      res.status(200).json({ image, title, content });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  };
+
+  static deleteUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { name } = req.body;
+      const record = await prisma.user.findFirstOrThrow({
+        where: { name: String(name) },
+      });
+      await prisma.user.delete({
+        where: { id: record.id },
+      });
+      res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  };
+}

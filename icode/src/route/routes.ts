@@ -1,10 +1,13 @@
 import { Router } from "express";
-import { readRecord, createRecord,filterRecord } from "../controller/controllers";
+import { DemoController } from "../controller/controllers";
 
 const router = Router();
 
-router.get("/api/", readRecord.readPost);
-router.get("/api/search/:id", filterRecord.filterPost)
-router.post("/api/create", createRecord.createPost);
-
+router.get("/api/userlist", DemoController.readUser);
+router.get("/api/user/:id", DemoController.findUser);
+router.post("/api/createuser", DemoController.createUser);
+router.post("/api/createtitle", DemoController.createTitle);
+router.post("/api/createpost", DemoController.createPost);
+router.patch("/api/changeprofile", DemoController.updateProfile);
+router.delete("/api/deleteuser", DemoController.deleteUser);
 export default router;
