@@ -1,13 +1,19 @@
 import { Router } from "express";
-import { DemoController } from "../controller/controllers";
+import { Post } from "../controller/PostController";
+import { Title } from "../controller/TitleController";
+import { Auth } from "../controller/AuthController";
 
 const router = Router();
 
-router.get("/api/userlist", DemoController.readUser);
-router.get("/api/user/:id", DemoController.findUser);
-router.post("/api/createuser", DemoController.createUser);
-router.post("/api/createtitle", DemoController.createTitle);
-router.post("/api/createpost", DemoController.createPost);
-router.patch("/api/changeprofile", DemoController.updateProfile);
-router.delete("/api/deleteuser", DemoController.deleteUser);
+router.post("/api/createpost", Post.createPost);
+
+router.get("/api/userlist", Auth.readUser);
+router.get("/api/user/:name", Auth.findUser);
+router.post("/api/createuser", Auth.createUser);
+router.patch("/api/changeprofile", Auth.updateProfile);
+router.delete("/api/deleteuser", Auth.deleteUser);
+
+router.post("/api/title", Title.setTitle);
+router.get("/api/titlelist", Title.getTitle);
+router.post("/api/subtitle", Title.subItem);
 export default router;
