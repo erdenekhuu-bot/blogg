@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Headers from "./components/Header";
 import logo_slogan from "../public/assets/logo_slogan.svg";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 const RootLayout = createContext("");
 const { Header, Footer, Content } = Layout;
@@ -43,6 +44,7 @@ export default function AppRoutes() {
     <App>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </App>
   );
