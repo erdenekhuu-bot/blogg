@@ -3,9 +3,9 @@ import { PrismaClient } from "@prisma/client";
 import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
-const generateJwt = (seed: any) => {
+export const generateJwt = (seed: any) => {
   return sign(seed, "JWT_SECRET_Mongol@google12_erdenee_hello_world");
 };
 export class Auth {
