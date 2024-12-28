@@ -13,7 +13,12 @@ export default function Home() {
   const fetching = async function () {
     try {
       const response = await axios.get(
-        "http://192.168.0.102:3000/api/titlelist"
+        "http://192.168.0.102:3000/api/titlelist",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.TOKEN}`,
+          },
+        }
       );
       setPosts(response.data);
     } catch (error) {
@@ -38,6 +43,12 @@ export default function Home() {
 
   const menuItems = generateMenuItems(posts);
 
+  const breadcrumbItems = [
+    { title: "Home" },
+    { title: "List" },
+    { title: "App" },
+  ];
+
   return (
     <Layout className="min-h-[100vh] bg-white">
       <Sider width={300} className="ml-10 mt-4">
@@ -51,11 +62,7 @@ export default function Home() {
       </Sider>
       <Layout>
         <Content>
-          <Breadcrumb className="m-10">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb className="m-10" items={breadcrumbItems} />
         </Content>
       </Layout>
     </Layout>
