@@ -1,11 +1,3 @@
-// import { HeartOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
-
-// export const items = [
-//   { key: 1, label: "Миний мэдээлэл", icon: <UserOutlined /> },
-//   { key: 2, label: "Таалагдсан", icon: <HeartOutlined /> },
-//   { key: 3, label: "Гарах", icon: <LogoutOutlined />, onclick: () => {} },
-// ];
-
 import { HeartOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +22,7 @@ export const useDropdownItems = (showModal: () => void): MenuProps["items"] => {
       key: "3",
       label: "Гарах",
       icon: <LogoutOutlined />,
-      onClick: showModal, // Open modal on click
+      onClick: showModal,
     },
   ];
 };

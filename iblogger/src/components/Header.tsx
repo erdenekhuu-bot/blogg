@@ -15,7 +15,9 @@ const Headers = function () {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
+  const [modalText, setModalText] = useState(
+    "Та системээс гарахдаа итгэлтэй байна уу ?"
+  );
 
   const showModal = () => {
     setOpen(true);
@@ -59,7 +61,14 @@ const Headers = function () {
       <Flex gap={10}>
         <img src={heart} alt="Heart" />
         <Dropdown menu={{ items }}>
-          <Button type="primary" size="large" className="bg-[#E86B02]">
+          <Button
+            type="primary"
+            size="large"
+            className="bg-[#E86B02]"
+            onClick={() => {
+              navigate("/post");
+            }}
+          >
             Post
             <CommentOutlined />
           </Button>

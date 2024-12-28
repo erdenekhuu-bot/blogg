@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Post from "./components/Post";
 
 const RootLayout = createContext("");
 const { Header, Footer, Content } = Layout;
@@ -48,6 +49,7 @@ export default function AppRoutes() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
+          <Route path="/post" element={<Post />} />
         </Routes>
       </App>
     </BrowserRouter>
