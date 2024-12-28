@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Breadcrumb } from "antd";
 import axios from "axios";
 import type { MenuProps } from "antd";
 
@@ -18,7 +18,6 @@ export default function Home() {
       setPosts(response.data);
     } catch (error) {
       console.log(error);
-      return;
     }
   };
 
@@ -51,7 +50,13 @@ export default function Home() {
         />
       </Sider>
       <Layout>
-        <Content>{/* Your content here */}</Content>
+        <Content>
+          <Breadcrumb className="m-10">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>App</Breadcrumb.Item>
+          </Breadcrumb>
+        </Content>
       </Layout>
     </Layout>
   );
