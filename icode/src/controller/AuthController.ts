@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { hash } from "bcrypt";
+import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
 const generateJwt = (seed: any) => {
-  return sign(seed, "JWT_SECRET");
+  return sign(seed, "JWT_SECRET_Mongol@google12_erdenee_hello_world");
 };
 export class Auth {
   static readUser = async (req: Request, res: Response): Promise<void> => {
@@ -15,6 +15,26 @@ export class Auth {
       res.status(200).json(record);
     } catch (error) {
       res.status(404).json({ error: error });
+    }
+  };
+
+  static Login = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { email, password } = req.body;
+      const record = await prisma.user.findUnique({
+        where: { email },
+      });
+      if (!record) {
+        throw new Error("User not found");
+      }
+      const isPasswordValid = await compare(password, record.password);
+      if (!isPasswordValid) {
+        res.status(401).json({ error: "Invalid password" });
+        return;
+      }
+      res.status(200).json({ token: generateJwt({ email }) });
+    } catch (error) {
+      res.status(404).json({ error: "Not found" });
     }
   };
 
@@ -50,7 +70,7 @@ export class Auth {
         },
       });
 
-      res.status(201).json({ ...record, token: generateJwt({ email }) });
+      res.status(201).json({ record, token: generateJwt({ email }) });
     } catch (error) {
       res.status(500).json({ error: error });
     }

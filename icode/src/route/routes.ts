@@ -7,6 +7,7 @@ const router = Router();
 
 router.post("/api/createpost", Post.createPost);
 
+router.post("/api/login", Auth.Login);
 router.get("/api/userlist", Auth.readUser);
 router.get("/api/user/:name", Auth.findUser);
 router.post("/api/createuser", Auth.createUser);
