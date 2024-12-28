@@ -1,8 +1,13 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { hash } from "bcrypt";
+import { sign } from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
+const generateJwt = (seed: any) => {
+  return sign(seed, "JWT_SECRET");
+};
 export class Auth {
   static readUser = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -36,16 +41,16 @@ export class Auth {
       if (!email || !name || !password) {
         res.status(400).json({ error: "Missing required fields" });
       }
-
+      const hashedPassword = await hash(password, 10);
       const record = await prisma.user.create({
         data: {
           email,
           name,
-          password,
+          password: hashedPassword,
         },
       });
 
-      res.status(201).json(record);
+      res.status(201).json({ ...record, token: generateJwt({ email }) });
     } catch (error) {
       res.status(500).json({ error: error });
     }
