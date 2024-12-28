@@ -1,5 +1,5 @@
 import { Flex, Dropdown } from "antd";
-import logo from "../../public/assets/logo.svg";
+import logo from "../assets/logo.svg";
 import { useState } from "react";
 import {
   SearchOutlined,
@@ -7,7 +7,7 @@ import {
   UserAddOutlined,
 } from "@ant-design/icons";
 import { Button, Input, Space } from "antd";
-import heart from "../../public/assets/u_heart.svg";
+import heart from "../assets/u_heart.svg";
 import { items } from "../data/drop-down-data";
 const Headers = function () {
   return (

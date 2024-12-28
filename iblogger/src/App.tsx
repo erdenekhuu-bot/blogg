@@ -2,7 +2,7 @@ import { createContext, ReactNode } from "react";
 import { Layout, Flex } from "antd";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Headers from "./components/Header";
-import logo_slogan from "../public/assets/logo_slogan.svg";
+import logo_slogan from "./assets/logo_slogan.svg";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
