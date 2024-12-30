@@ -6,6 +6,8 @@ import { Authentication } from "../middleware/middlewares";
 
 const router = Router();
 
+router.get("/api/test", Post.testAPI);
+
 router.post("/api/createpost", Authentication.layer, Post.createPost);
 router.get("/api/listpost", Authentication.layer, Post.postList);
 router.get("/api/post/:id", Authentication.layer, Post.readPost);

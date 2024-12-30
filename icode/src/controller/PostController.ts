@@ -4,6 +4,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class Post {
+  static testAPI = async (req: Request, res: Response): Promise<void> => {
+    res.send("Hello Erdenee");
+  };
+
   static postList = async (req: Request, res: Response): Promise<void> => {
     try {
       const record = await prisma.post.findMany();
