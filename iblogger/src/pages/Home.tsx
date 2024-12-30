@@ -7,19 +7,19 @@ const { Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
+export const ADDRESS = "192.168.0.102";
+
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
   const fetching = async function () {
     try {
-      const response = await axios.get(
-        "http://192.168.0.102:3000/api/titlelist",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.TOKEN}`,
-          },
-        }
-      );
+      const response = await axios.get(`http://${ADDRESS}:3000/api/titlelist`, {
+        headers: {
+          Authorization: `Bearer ${process.env.TOKEN}`,
+        },
+      });
+
       setPosts(response.data);
     } catch (error) {
       console.log(error);

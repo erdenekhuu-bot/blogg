@@ -46,10 +46,11 @@ export default function AppRoutes() {
       <App>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />}>
+            <Route path="post" element={<Post />} />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
-          <Route path="/post" element={<Post />} />
         </Routes>
       </App>
     </BrowserRouter>

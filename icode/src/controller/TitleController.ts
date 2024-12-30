@@ -47,4 +47,13 @@ export class Title {
       res.status(500).json({ error: "Internal server error" });
     }
   };
+
+  static category = async (req: Request, res: Response) => {
+    try {
+      const record = await prisma.titleItems.findMany();
+      res.status(200).json(record);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
 }

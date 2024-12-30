@@ -20,6 +20,7 @@ router.patch("/api/changeprofile", Authentication.layer, Auth.updateProfile);
 router.delete("/api/deleteuser", Auth.deleteUser);
 
 router.post("/api/title", Authentication.layer, Title.setTitle);
+router.get("/api/category", Authentication.layer, Title.category);
 router.get("/api/titlelist", Authentication.layer, Title.getTitle);
 router.post("/api/subtitle", Authentication.layer, Title.subItem);
 export default router;

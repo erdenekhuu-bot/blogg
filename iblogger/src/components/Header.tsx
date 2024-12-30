@@ -66,7 +66,7 @@ const Headers = function () {
             size="large"
             className="bg-[#E86B02]"
             onClick={() => {
-              navigate("/post");
+              navigate("/profile/post");
             }}
           >
             Post

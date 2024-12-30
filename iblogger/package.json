@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
     "antd": "^5.22.4",
+    "antd-img-crop": "^4.24.0",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "react": "^18.3.1",

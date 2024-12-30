@@ -1,5 +1,6 @@
 import { Layout, Flex, Card, Typography } from "antd";
 import no_posts from "../assets/no_posts.svg";
+import { Outlet } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -21,9 +22,10 @@ export default function Profile() {
           </Flex>
         </Card>
         <Layout>
-          <Content>
+          {/* <Content>
             <img src={no_posts} alt="" />
-          </Content>
+          </Content> */}
+          <Outlet />
         </Layout>
       </Flex>
     </Layout>
