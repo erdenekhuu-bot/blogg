@@ -37,8 +37,10 @@ router.get("/api/category", Authentication.layer, Title.category);
 router.get("/api/titlelist", Authentication.layer, Title.getTitle);
 router.post("/api/subtitle", Authentication.layer, Title.subItem);
 
+router.get("/api/imagelist", Authentication.layer, Post.imageList);
 router.post(
   "/api/savefile",
+  Authentication.layer,
   upload.single("image"),
   (req: Request, res: Response) => {
     try {
@@ -49,19 +51,19 @@ router.post(
   }
 );
 
-router.get("/api/imagelist", (req: Request, res: Response) => {
-  const directoryPath = path.join(__dirname, "../../images");
+// router.get("/api/imagelist", (req: Request, res: Response) => {
+//   const directoryPath = path.join(__dirname, "../../images");
 
-  fs.readdir(directoryPath, (err, files) => {
-    if (err) {
-      return res.status(500).json({ error: "Unable to scan directory" });
-    }
+//   fs.readdir(directoryPath, (err, files) => {
+//     if (err) {
+//       return res.status(500).json({ error: "Unable to scan directory" });
+//     }
 
-    const imageFiles = files.filter(
-      (file) =>
-        file.endsWith(".jpeg") || file.endsWith(".jpg") || file.endsWith(".png")
-    );
-    res.status(200).json(imageFiles);
-  });
-});
+//     const imageFiles = files.filter(
+//       (file) =>
+//         file.endsWith(".jpeg") || file.endsWith(".jpg") || file.endsWith(".png")
+//     );
+//     res.status(200).json(imageFiles);
+//   });
+// });
 export default router;
