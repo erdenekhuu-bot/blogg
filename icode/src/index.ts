@@ -6,6 +6,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname + "/images"));
+app.use("/imagelist", express.static("images"));
 app.use(router);
 
 app.listen(3000, () => {
