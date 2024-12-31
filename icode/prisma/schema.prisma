@@ -45,7 +45,7 @@ model Post {
   updatedAt  DateTime     @updatedAt
   userId     Int
   categories Category[]
-  user       User         @relation(fields: [userId], references: [id])
+  user       User?         @relation(fields: [userId], references: [id])
   titles     TitleItems[] @relation("Category")
 }
 

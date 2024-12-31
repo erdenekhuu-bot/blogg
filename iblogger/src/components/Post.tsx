@@ -1,13 +1,10 @@
 import { Layout, Typography, Select, Upload, Input, Form, Button } from "antd";
 import { useState, useEffect } from "react";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import type { SelectProps } from "antd";
 import axios from "axios";
 import { ADDRESS } from "../pages/Home";
-import type { GetProp, UploadFile, UploadProps } from "antd";
-import ImgCrop from "antd-img-crop";
-
-type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+import type { UploadProps } from "antd";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -51,38 +48,38 @@ export default function Post() {
     }));
   };
 
-  const categoryOptions = getCategoryOptions(getCategory);
-
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+  const props: UploadProps = {
+    name: "file",
+    action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+    headers: {
+      authorization: "authorization-text",
     },
-  ]);
-
-  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+    onChange(info) {
+      if (info.file.status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === "done") {
+        alert(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        alert(`${info.file.name} file upload failed.`);
+      }
+    },
   };
 
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url as string;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as FileType);
-        reader.onload = () => resolve(reader.result as string);
-      });
+  const categoryOptions = getCategoryOptions(getCategory);
+  const onFinish = async (values: any) => {
+    try {
+      const response = await axios.post(
+        `http://${ADDRESS}:3000/api/createpost`,
+        {
+          ...values,
+        }
+      );
+      alert("Post created successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to create post.");
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
-  };
-
-  const onFinish = (values: any) => {
-    console.log(values);
   };
 
   return (
@@ -112,18 +109,10 @@ export default function Post() {
             />
           </Form.Item>
           <p className="mt-8 mb-4 font-bold text-lg">Cover зураг</p>
-          <Form.Item name="cover" rules={[{ required: true }]}>
-            <ImgCrop rotationSlider>
-              <Upload
-                //action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                listType="picture-card"
-                fileList={fileList}
-                onChange={onChange}
-                onPreview={onPreview}
-              >
-                {fileList.length < 5 && "+ Upload"}
-              </Upload>
-            </ImgCrop>
+          <Form.Item name="image" rules={[{ required: true }]}>
+            <Upload {...props}>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
           </Form.Item>
           <p className="mt-8 mb-4 font-bold text-lg">Гарчиг</p>
           <Form.Item name="title" rules={[{ required: true }]}>
