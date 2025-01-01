@@ -49,10 +49,10 @@ export default function Post() {
   };
 
   const props: UploadProps = {
-    name: "file",
-    action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+    name: "image",
+    action: `http://${ADDRESS}:3000/api/savefile/`,
     headers: {
-      authorization: "authorization-text",
+      authorization: `Bearer ${process.env.TOKEN}`,
     },
     onChange(info) {
       if (info.file.status !== "uploading") {
@@ -67,18 +67,26 @@ export default function Post() {
   };
 
   const categoryOptions = getCategoryOptions(getCategory);
+
   const onFinish = async (values: any) => {
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("content", values.content);
+    formData.append("category", values.category);
+    if (values.image && values.image.file) {
+      formData.append("image", values.image.file.originFileObj);
+    }
+
     try {
-      const response = await axios.post(
-        `http://${ADDRESS}:3000/api/createpost`,
-        {
-          ...values,
-        }
-      );
+      await axios.post(`http://${ADDRESS}:3000/api/createpost`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: `Bearer ${process.env.TOKEN}`,
+        },
+      });
       alert("Post created successfully!");
     } catch (error) {
       console.error(error);
-      alert("Failed to create post.");
     }
   };
 
@@ -109,7 +117,7 @@ export default function Post() {
             />
           </Form.Item>
           <p className="mt-8 mb-4 font-bold text-lg">Cover зураг</p>
-          <Form.Item name="image" rules={[{ required: true }]}>
+          <Form.Item rules={[{ required: true }]}>
             <Upload {...props}>
               <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>
