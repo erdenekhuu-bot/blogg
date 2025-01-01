@@ -5,8 +5,6 @@ import { Auth } from "../controller/AuthController";
 import { Authentication } from "../middleware/middlewares";
 import multer from "multer";
 import { Request, Response } from "express";
-import fs from "fs";
-import path from "path";
 
 const router = Router();
 var storage = multer.diskStorage({
@@ -51,19 +49,4 @@ router.post(
   }
 );
 
-// router.get("/api/imagelist", (req: Request, res: Response) => {
-//   const directoryPath = path.join(__dirname, "../../images");
-
-//   fs.readdir(directoryPath, (err, files) => {
-//     if (err) {
-//       return res.status(500).json({ error: "Unable to scan directory" });
-//     }
-
-//     const imageFiles = files.filter(
-//       (file) =>
-//         file.endsWith(".jpeg") || file.endsWith(".jpg") || file.endsWith(".png")
-//     );
-//     res.status(200).json(imageFiles);
-//   });
-// });
 export default router;

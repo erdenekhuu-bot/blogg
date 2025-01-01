@@ -5,7 +5,6 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
@@ -15,7 +14,7 @@ model User {
   password  String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  post      Post[]
+  // post      Post[]
   bookmark  Bookmark[]
 }
 
@@ -43,9 +42,9 @@ model Post {
   content    String
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  userId     Int
+  // userId     Int
   categories Category[]
-  user       User?         @relation(fields: [userId], references: [id])
+  // user       User?         @relation(fields: [userId], references: [id])
   titles     TitleItems[] @relation("Category")
 }
 

@@ -30,39 +30,39 @@ export class Post {
     }
   };
 
-  static createPost = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { category, image, title, content } = req.body;
+  static createPost = [
+    upload.single("image"),
+    async (req: Request, res: Response): Promise<void> => {
+      try {
+        const { category, title, content } = req.body;
+        const image = req.file?.filename;
 
-      if (!image || !title || !content || !category) {
-        res.status(400).json({ error: "Missing required fields" });
+        const findTitle = await prisma.titleItems.findFirstOrThrow({
+          where: { content: category },
+        });
+
+        const makePost = await prisma.post.create({
+          data: {
+            title,
+            content,
+            image: String(image),
+          },
+        });
+
+        const record = await prisma.category.create({
+          data: {
+            titleId: findTitle.id,
+            postId: makePost.id,
+          },
+        });
+
+        res.status(201).json({ post: makePost, category: record });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to create post" });
       }
-
-      const findTitle = await prisma.titleItems.findFirstOrThrow({
-        where: { title: category },
-      });
-
-      const makePost = await prisma.post.create({
-        data: {
-          image,
-          title,
-          content,
-        },
-      });
-
-      const record = await prisma.category.create({
-        data: {
-          titleId: findTitle.id,
-          postId: makePost.id,
-        },
-      });
-
-      res.status(201).json({ post: makePost, category: record });
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  };
-
+    },
+  ];
   static readPost = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
