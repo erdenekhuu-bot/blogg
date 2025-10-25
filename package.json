@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "egg": "^3.17.5",
-    "egg-scripts": "2"
+    "egg-scripts": "2",
+    "mongoose": "^8.19.2"
   },
   "devDependencies": {
     "egg-bin": "6",
