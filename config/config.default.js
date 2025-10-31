@@ -16,6 +16,11 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  config.cors = {
+      Origin: '*', // access the whitelist and set it according to your own needs
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
