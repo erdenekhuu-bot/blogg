@@ -17,9 +17,16 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.cors = {
-      Origin: '*', // access the whitelist and set it according to your own needs
+      Origin: '*',
       allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
+  config.mongoose={
+    client: {
+       url: 'mongodb://127.0.0.1:27017/erdenee',
+       options:{},
+       plugins: [createdPlugin, [updatedPlugin, pluginOptions]],
+    }
+  }
 
   // add your user config here
   const userConfig = {
