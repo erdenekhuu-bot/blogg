@@ -1,5 +1,5 @@
 /** @type Egg.EggPlugin */
-module.exports = {z
+module.exports = {
   // had enabled by egg
   static: {
     enable: true,
@@ -9,13 +9,3 @@ module.exports = {z
     package: 'egg-mongoose',
   },
 };
-
-exports.cors = {
-    enable: true,
-    package: 'egg-cors',
-};
-
-exports.mongoose = {
-    enable: true,
-    package: 'egg-mongoose',
-}
