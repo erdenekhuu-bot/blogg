@@ -11,7 +11,9 @@
     "egg": "^3.17.5",
     "egg-mongoose": "^4.0.1",
     "egg-scripts": "2",
-    "mongoose": "^8.19.2"
+    "egg-view-nunjucks": "^2.3.0",
+    "mongoose": "^8.19.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "egg-bin": "6",

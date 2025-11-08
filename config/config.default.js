@@ -1,5 +1,4 @@
-/* eslint valid-jsdoc: "off" */
-
+const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -27,7 +26,16 @@ module.exports = appInfo => {
       enable: false,
     },
   };
-
+  config.view = {
+    defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.html': 'nunjucks',
+    },
+    root: [
+      path.join(appInfo.baseDir, 'app/view'),
+      path.join(appInfo.baseDir, 'app/another_view'),
+    ].join(','),
+  };
   // add your user config here
   config.userConfig = {
     // myAppName: 'egg',

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - User List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .form-container {
+            margin-top: 30px;
+        }
+        .form-container input {
+            padding: 8px;
+            margin-right: 10px;
+        }
+        .form-container button {
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Users List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Password</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.password }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="3">No users found</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="form-container">
+    <h2>Add New User</h2>
+    <form method="POST" action="/admin/users">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Create User</button>
+    </form>
+</div>
+
+</body>
+</html>
