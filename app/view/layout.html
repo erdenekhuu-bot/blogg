@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}My App{% endblock %}</title>
+  </head>
+  <body class="relative">
+    <header class="relative z-10 p-4 bg-white/50">
+      <h1>Coffee Shop</h1>
+    </header>
+
+    <section class="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-[url('/coffeeshop.jpg')] z-0">
+      <div class="w-full h-full bg-black/20"></div>
+    </section>
+
+    <main class="relative z-10 flex h-screen">
+      <div class="bg-yellow w-[15rem] p-4">Menu item</div>
+      <div class="flex-1 p-4">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer class="relative z-10 p-4 bg-white/50">
+      &copy; 2025 My App
+    </footer>
+
+  </body>
+</html>

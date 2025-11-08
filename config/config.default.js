@@ -38,7 +38,13 @@ module.exports = appInfo => {
       path.join(appInfo.baseDir, 'app/another_view'),
     ].join(','),
   };
-  // add your user config here
+
+  config.static = {
+    prefix: '/',
+    dir: path.join(appInfo.baseDir, 'app/public'),
+    dynamic: true,
+  };
+
   config.userConfig = {
     // myAppName: 'egg',
   };
