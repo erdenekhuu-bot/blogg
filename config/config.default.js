@@ -16,25 +16,24 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
-  config.cors = {
-      Origin: '*',
-      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
-  };
-  config.mongoose={
+  config.mongoose = {
     client: {
-       url: 'mongodb://127.0.0.1:27017/erdenee',
-       options:{},
-       plugins: [createdPlugin, [updatedPlugin, pluginOptions]],
-    }
-  }
+      url: 'mongodb://127.0.0.1:27017/local',
+      options: {},
+    },
+  };
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
 
   // add your user config here
-  const userConfig = {
+  config.userConfig = {
     // myAppName: 'egg',
   };
 
   return {
     ...config,
-    ...userConfig,
   };
 };

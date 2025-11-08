@@ -1,9 +1,13 @@
 /** @type Egg.EggPlugin */
 module.exports = {z
   // had enabled by egg
-  // static: {
-  //   enable: true,
-  // }
+  static: {
+    enable: true,
+  },
+  mongoose: {
+    enable: true,
+    package: 'egg-mongoose',
+  },
 };
 
 exports.cors = {
