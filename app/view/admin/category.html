@@ -1,0 +1,36 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}Category page{% endblock %}
+
+{% block content %}
+  <p class="font-bold text-white">Category page</p>
+  <form method="POST" action="/api/category">
+    <input type="text" name="name" class="p-2 rounded" required/>
+    <input type="text" name="description" class="p-2 rounded" required/>
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">save</button>
+  </form>
+
+ <table class="min-w-full bg-white border border-gray-200 rounded mt-12">
+    <thead>
+      <tr class="bg-gray-200 text-left">
+        <th class="p-2">№</th>
+        <th class="p-2">Name</th>
+        <th class="p-2">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in data %}
+        <tr class="border">
+          <td class="p-2">{{ loop.index }}</td>
+          <td class="p-2">{{ item.name }}</td>
+          <td class="p-2">{{ item.description }}</td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="3" class="p-2 text-gray-500 text-center">No categories yet</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+{% endblock %}

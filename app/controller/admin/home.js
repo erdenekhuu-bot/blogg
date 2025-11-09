@@ -1,11 +1,21 @@
 const Controller = require('egg').Controller;
 
 class AdminHomeController extends Controller {
-  async index() {
-    await this.ctx.render('admin/user_list.html', {
-      users: await this.ctx.model.User.find(),
-    });
+  async category(){
+    const data=await this.ctx.service.categoryService.findMany()
+    await this.ctx.render('admin/category.html',{data})
   }
+  async product(){
+    const data=await this.ctx.service.productService.findMany()
+    await this.ctx.render('admin/product.html',{data})
+  }
+  async subscribe(){
+    await this.ctx.render('admin/subscribe.html')
+  }
+  async type(){
+    await this.ctx.render('admin/type.html')
+  }
+  
 }
 
 module.exports = AdminHomeController;
