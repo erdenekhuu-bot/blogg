@@ -16,4 +16,6 @@ module.exports = app => {
   router.post('/api/posts', controller.post.create);
   router.get('/api/posts', controller.post.index);
   
+
+  router.get('/api/test',controller.mhn.mhn)
 };
