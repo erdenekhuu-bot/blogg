@@ -7,7 +7,8 @@ class AdminHomeController extends Controller {
   }
   async product(){
     const data=await this.ctx.service.productService.findMany()
-    await this.ctx.render('admin/product.html',{data})
+    const category=await this.ctx.service.categoryService.findMany()
+    await this.ctx.render('admin/product.html',{data, category})
   }
   async subscribe(){
     await this.ctx.render('admin/subscribe.html')

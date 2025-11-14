@@ -6,7 +6,7 @@ class ProductService extends Service {
         return record;
     }
     async findMany() {
-        const records = await this.ctx.model.Product.find();
+        const records = await this.ctx.model.Product.find().populate('category');
         return records;
   }
 }

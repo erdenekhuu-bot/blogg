@@ -44,6 +44,9 @@ module.exports = appInfo => {
     dir: path.join(appInfo.baseDir, 'app/public'),
     dynamic: true,
   };
+  config.jwt = {
+    secret: "password"
+  }
 
   config.userConfig = {
     // myAppName: 'egg',

@@ -9,13 +9,9 @@ module.exports = app => {
   router.get('/admin/subscribe',controller.admin.home.subscribe)
   router.get('/admin/type',controller.admin.home.type)
 
-  router.get('/api/category',controller.categoryController.list)
+  router.get('/api/category', controller.categoryController.list)
   router.post('/api/category', controller.categoryController.create);
-  router.get('/api/users', controller.user.index);
-  router.post('/api/users', controller.user.create);
-  router.post('/api/posts', controller.post.create);
-  router.get('/api/posts', controller.post.index);
-  
+  router.post('/api/product',controller.productController.create)
+  router.get('/api/product',controller.productController.list)
 
-  router.get('/api/test',controller.mhn.mhn)
 };
