@@ -50,7 +50,7 @@ module.exports = (appInfo) => {
     dynamic: true,
   };
   config.jwt = {
-    secret: "password",
+    secret: process.env.SECRETJWT,
   };
 
   config.userConfig = {
