@@ -1,24 +1,29 @@
-const path = require('path');
+const path = require("path");
+require("dotenv").config();
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
-module.exports = appInfo => {
+module.exports = (appInfo) => {
   /**
    * built-in config
    * @type {Egg.EggAppConfig}
    **/
-  const config = exports = {};
+  const config = (exports = {});
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1761377939832_6604';
+  config.keys = appInfo.name + "_1761377939832_6604";
 
   // add your middleware config here
   config.middleware = [];
 
   config.mongoose = {
     client: {
-      url: 'mongodb://127.0.0.1:27017/local',
-      options: {},
+      // url: "mongodb://127.0.0.1:27017/local",
+      url: process.env.MONGODB_URI,
+      options: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
     },
   };
   config.security = {
@@ -27,26 +32,26 @@ module.exports = appInfo => {
     },
   };
   config.view = {
-    defaultViewEngine: 'nunjucks',
+    defaultViewEngine: "nunjucks",
     mapping: {
-      '.nj': 'nunjucks',
-      '.tpl': 'nunjucks',
-      '.html': 'nunjucks',
+      ".nj": "nunjucks",
+      ".tpl": "nunjucks",
+      ".html": "nunjucks",
     },
     root: [
-      path.join(appInfo.baseDir, 'app/view'),
-      path.join(appInfo.baseDir, 'app/another_view'),
-    ].join(','),
+      path.join(appInfo.baseDir, "app/view"),
+      path.join(appInfo.baseDir, "app/another_view"),
+    ].join(","),
   };
 
   config.static = {
-    prefix: '/',
-    dir: path.join(appInfo.baseDir, 'app/public'),
+    prefix: "/",
+    dir: path.join(appInfo.baseDir, "app/public"),
     dynamic: true,
   };
   config.jwt = {
-    secret: "password"
-  }
+    secret: "password",
+  };
 
   config.userConfig = {
     // myAppName: 'egg',

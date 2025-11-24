@@ -8,6 +8,7 @@
     "declarations": true
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "dump": "^1.0.1",
     "egg": "^3.17.5",
     "egg-jwt": "^3.1.7",
