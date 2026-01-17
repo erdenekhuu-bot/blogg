@@ -6,9 +6,16 @@ class CategoryService extends Service {
     const record = await this.ctx.model.Category.create({ name, description });
     return record;
   }
-  async findMany() {
-    const records = await this.ctx.model.Category.find();
-    return records;
+  async findMany(param) {
+    if (!param) {
+          return await this.ctx.model.Category.find();
+    }
+    const safe = String(param).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    const record = await this.ctx.model.Category.find({
+      name: { $regex: safe, $options: 'i' }
+    });
+  return record
   }
 }
 

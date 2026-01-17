@@ -7,8 +7,9 @@ class CategoryController extends Controller {
     ctx.redirect('/admin');
   }
   async list(){
-    const category_record=await this.ctx.model.Category.find()
-    this.ctx.body = category_record;
+    const {param}=this.ctx.query;
+    const record = await this.ctx.service.categoryService.findMany(param)
+    this.ctx.body = record
   }
 }
 
