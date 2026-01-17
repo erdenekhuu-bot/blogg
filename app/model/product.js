@@ -9,5 +9,6 @@ module.exports = app => {
     image: String,
     size: Number,
     about: String,
+    attribute: String,
   }));
 };
