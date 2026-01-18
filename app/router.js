@@ -13,9 +13,13 @@ module.exports = app => {
 
   //api route
   router.get('/api/category', controller.categoryController.list)
-  router.post('/api/category', controller.categoryController.create);
+  router.post('/api/category', controller.categoryController.create)
+
+
+
   router.post('/api/product',controller.productController.create)
   router.get('/api/product',controller.productController.list)
+  router.patch('/api/product', controller.productController.favorite)
 
   router.get('/api/product/search',controller.productController.search)
 

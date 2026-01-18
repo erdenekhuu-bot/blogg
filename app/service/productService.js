@@ -24,6 +24,24 @@ class ProductService extends Service {
         });
         return record
     }
+    async update(id){
+        if(!id){
+            return
+        }
+        const record = await this.ctx.model.Product.updateOne(
+            {_id: ObjectId(id)},
+            {$set: {attribute: '1'}}
+        )
+        return record
+    }
+
+    async find(id){
+        if(!id){
+            return
+        }
+        const record = await this.ctx.model.Product.findById(id)
+        return record
+    }
 }
 
 module.exports=ProductService

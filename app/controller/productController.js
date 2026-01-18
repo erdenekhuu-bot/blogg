@@ -8,15 +8,18 @@ class ProductController extends Controller {
         const { ctx } = this;
         const stream = await ctx.getFileStream();
         const uploadDir = path.join(this.app.baseDir, 'app/public/products');
+
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
+
         const filename = Date.now() + path.extname(stream.filename);
 
         const target = path.join(uploadDir, filename);
         const writeStream = fs.createWriteStream(target);
         await pump(stream, writeStream);
-        const { name, price, size, about,category  } = stream.fields;
+
+        const { name, price, size, about,category} = stream.fields;
 
         await ctx.service.productService.create({
             name,
@@ -24,17 +27,20 @@ class ProductController extends Controller {
             size,
             about,
             category,
-            image: `/products/${filename}`,
+            image: `/products/${filename}`
         });
         ctx.redirect('/admin/product');
         }
+
     async list(){
         const {kind}=this.ctx.queries;
         const product_record=await this.ctx.service.productService.findMany(kind)
         this.ctx.body = product_record;
     }
     async favorite(){
-        this.ctx.body;
+        const {attribute}=this.ctx.body
+        const updatedProduct=await this.ctx.service.productService.update(attribute)
+        this.ctx.body=updatedProduct;
     }
     async search(){
         const {name}=this.ctx.queries;

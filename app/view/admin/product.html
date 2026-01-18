@@ -10,7 +10,7 @@
       <input type="text" name="name" class="p-2 rounded w-96" required/>
     </div>
     <div class="my-4">
-    <select name="category">
+    <select name="category" class="block bg-white px-3 py-2.5">
       {% for item in category%}
           <option value="{{ item.id }}">{{ item.name }}</option>
       {% endfor %}
@@ -22,7 +22,7 @@
     </div>
     <div class="my-4">
       <p class="font-bold text-black">Product image:</p>
-      <input type="file" name="image" class="p-2 rounded w-96" required/>
+      <input type="file" name="image" class="block px-3 py-2.5 rounded w-96" required/>
     </div>
     <div class="my-4">
       <p class="font-bold text-black">Product size:</p>
@@ -34,7 +34,7 @@
     </div>
     <button type="submit" class="bg-blue-500 text-white p-2 rounded">save</button>
   </form>
-  <table class="min-w-full bg-white border border-gray-200 rounded mt-12">
+  <table class="min-w-full bg-white border border-gray-200 rounded mt-12 h-24 overflow-y-scroll">
     <thead>
       <tr class="bg-gray-200 text-left">
         <th class="p-2">№</th>
@@ -57,7 +57,7 @@
         </tr>
       {% else %}
         <tr>
-          <td colspan="3" class="p-2 text-gray-500 text-center">No categories yet</td>
+          <td colspan="3" class="p-2 text-gray-500 text-center">No product yet</td>
         </tr>
       {% endfor %}
     </tbody>
