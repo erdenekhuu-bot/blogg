@@ -37,11 +37,13 @@ class ProductController extends Controller {
         const product_record=await this.ctx.service.productService.findMany(kind)
         this.ctx.body = product_record;
     }
-    async favorite(){
-        const {attribute}=this.ctx.body
-        const updatedProduct=await this.ctx.service.productService.update(attribute)
-        this.ctx.body=updatedProduct;
+    async favorite() {
+        const { ctx } = this; 
+        const {attribute} = ctx.request.body;
+        const updatedProduct = await ctx.service.productService.update(attribute);
+        this.ctx.body=updatedProduct
     }
+
     async search(){
         const {name}=this.ctx.queries;
         const result = await this.ctx.service.productService.searchs(name)

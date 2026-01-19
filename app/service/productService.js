@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const { ObjectId } = require('mongodb');
 
 class ProductService extends Service {
     async create(data) {
@@ -26,10 +27,11 @@ class ProductService extends Service {
     }
     async update(id){
         if(!id){
-            return
+            throw new Error("No id")
         }
+
         const record = await this.ctx.model.Product.updateOne(
-            {_id: ObjectId(id)},
+            {_id: new ObjectId(id)},
             {$set: {attribute: '1'}}
         )
         return record
@@ -37,7 +39,7 @@ class ProductService extends Service {
 
     async find(id){
         if(!id){
-            return
+           throw new Error("No id")
         }
         const record = await this.ctx.model.Product.findById(id)
         return record
