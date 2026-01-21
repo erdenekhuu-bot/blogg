@@ -6,6 +6,7 @@ module.exports = (app) => {
     "User",
     new Schema({
       username: String,
+      phone: String,
       password: String,
     }),
   );
