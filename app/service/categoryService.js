@@ -1,4 +1,4 @@
-const Service = require('egg').Service;
+const Service = require("egg").Service;
 
 class CategoryService extends Service {
   async create(data) {
@@ -8,14 +8,16 @@ class CategoryService extends Service {
   }
   async findMany(param) {
     if (!param) {
-        return await this.ctx.model.Category.find();
+      return await this.ctx.model.Category.find();
     }
-    const safe = String(param).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    
+    const safe = String(param)
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
     const record = await this.ctx.model.Category.find({
-      name: { $regex: safe, $options: 'i' }
+      name: { $regex: safe, $options: "i" },
     });
-  return record
+    return record;
   }
 }
 

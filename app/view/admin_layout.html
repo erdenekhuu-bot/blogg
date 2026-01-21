@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>{% block title %}My App{% endblock %}</title>
   </head>
@@ -10,29 +10,36 @@
       <h1>Coffee Shop management</h1>
     </header>
 
-    <section class="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-[url('/coffeeshop.jpg')] z-0">
+    <section
+      class="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-[url('/coffeeshop.jpg')] z-0"
+    >
       <div class="w-full h-full bg-white/60"></div>
     </section>
 
     <main class="relative z-10 flex h-screen">
       <div class="bg-yellow w-[15rem] p-2 bg-green-400/50">
-        <p class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white">
+        <p
+          class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white"
+        >
           <a href="/admin">Category</a>
         </p>
-        <p class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white">
+        <p
+          class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white"
+        >
           <a href="/admin/product">Product</a>
         </p>
-        <p class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white">
+        <p
+          class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white"
+        >
           <a href="/admin/subscribe">Subscribe</a>
         </p>
-        <p class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white">
+        <p
+          class="p-2 m-4 text-xl hover:cursor-pointer hover:bg-blue-400 hover:text-white"
+        >
           <a href="/admin/type">Product type</a>
         </p>
       </div>
-      <div class="flex-1 p-4">
-        {% block content %}{% endblock %}
-      </div>
+      <div class="flex-1 p-4">{% block content %}{% endblock %}</div>
     </main>
-
   </body>
 </html>

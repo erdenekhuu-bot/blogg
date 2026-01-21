@@ -1,16 +1,13 @@
-{% extends "layout.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-  <section class="flex m-4 flex-wrap">
-    {% for item in data %}
-      <div class="border w-56 m-4 z-20">
-        <p class="font-bold text-center text-2xl">{{item.name}}</p>
-        <img src={{item.image}} alt=""/>
-        <p class="text-xl">{{item.category.name}}</p>
-        <p class="font-bold p-2">{{item.price}}</p>
-      </div>
-    {% endfor %}
-  </section>
+{% extends "layout.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<section class="flex m-4 flex-wrap">
+  {% for item in data %}
+  <div class="border w-56 m-4 z-20">
+    <p class="font-bold text-center text-2xl">{{item.name}}</p>
+    <img src="{{item.image}}" alt="" />
+    <p class="text-xl">{{item.category.name}}</p>
+    <p class="font-bold p-2">{{item.price}}</p>
+  </div>
+  {% endfor %}
+</section>
 {% endblock %}

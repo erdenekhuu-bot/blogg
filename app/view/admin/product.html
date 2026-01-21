@@ -1,65 +1,69 @@
-{% extends "admin_layout.html" %}
-
-{% block title %}Product{% endblock %}
-
-{% block content %}
-  <p class="font-bold text-white">Product page</p>
-  <form method="POST" action="/api/product" enctype="multipart/form-data">
-    <div class="my-4">
-      <p class="font-bold text-black">Product name:</p>
-      <input type="text" name="name" class="p-2 rounded w-96" required/>
-    </div>
-    <div class="my-4">
+{% extends "admin_layout.html" %} {% block title %}Product{% endblock %} {%
+block content %}
+<p class="font-bold text-white">Product page</p>
+<form method="POST" action="/api/product" enctype="multipart/form-data">
+  <div class="my-4">
+    <p class="font-bold text-black">Product name:</p>
+    <input type="text" name="name" class="p-2 rounded w-96" required />
+  </div>
+  <div class="my-4">
     <select name="category" class="block bg-white px-3 py-2.5">
       {% for item in category%}
-          <option value="{{ item.id }}">{{ item.name }}</option>
+      <option value="{{ item.id }}">{{ item.name }}</option>
       {% endfor %}
     </select>
-    </div>
-    <div class="my-4">
-      <p class="font-bold text-black">Product price:</p>
-      <input type="number" name="price" class="p-2 rounded w-96" required/>
-    </div>
-    <div class="my-4">
-      <p class="font-bold text-black">Product image:</p>
-      <input type="file" name="image" class="block px-3 py-2.5 rounded w-96" required/>
-    </div>
-    <div class="my-4">
-      <p class="font-bold text-black">Product size:</p>
-      <input type="number" name="size" class="p-2 rounded w-96" required/>
-    </div>
-    <div class="my-4">
-      <p class="font-bold text-black">Product about:</p>
-      <TextArea name="about" class="w-96" rows="5" cols="50"></TextArea>
-    </div>
-    <button type="submit" class="bg-blue-500 text-white p-2 rounded">save</button>
-  </form>
-  <table class="min-w-full bg-white border border-gray-200 rounded mt-12 h-24 overflow-y-scroll">
-    <thead>
-      <tr class="bg-gray-200 text-left">
-        <th class="p-2">№</th>
-        <th class="p-2">Name</th>
-        <th class="p-2">Pirce</th>
-        <th class="p-2">Image</th>
-        <th class="p-2">Size</th>
-        <th class="p-2">About</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in data %}
-        <tr class="border">
-          <td class="p-2">{{ loop.index }}</td>
-          <td class="p-2">{{ item.name }}</td>
-          <td class="p-2">{{ item.price }}</td>
-          <td class="p-2">{{ item.image }}</td>
-          <td class="p-2">{{ item.size }}</td>
-          <td class="p-2">{{ item.about }}</td>
-        </tr>
-      {% else %}
-        <tr>
-          <td colspan="3" class="p-2 text-gray-500 text-center">No product yet</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  </div>
+  <div class="my-4">
+    <p class="font-bold text-black">Product price:</p>
+    <input type="number" name="price" class="p-2 rounded w-96" required />
+  </div>
+  <div class="my-4">
+    <p class="font-bold text-black">Product image:</p>
+    <input
+      type="file"
+      name="image"
+      class="block px-3 py-2.5 rounded w-96"
+      required
+    />
+  </div>
+  <div class="my-4">
+    <p class="font-bold text-black">Product size:</p>
+    <input type="number" name="size" class="p-2 rounded w-96" required />
+  </div>
+  <div class="my-4">
+    <p class="font-bold text-black">Product about:</p>
+    <textarea name="about" class="w-96" rows="5" cols="50"></textarea>
+  </div>
+  <button type="submit" class="bg-blue-500 text-white p-2 rounded">save</button>
+</form>
+<table
+  class="min-w-full bg-white border border-gray-200 rounded mt-12 h-24 overflow-y-scroll"
+>
+  <thead>
+    <tr class="bg-gray-200 text-left">
+      <th class="p-2">№</th>
+      <th class="p-2">Name</th>
+      <th class="p-2">Pirce</th>
+      <th class="p-2">Image</th>
+      <th class="p-2">Size</th>
+      <th class="p-2">About</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in data %}
+    <tr class="border">
+      <td class="p-2">{{ loop.index }}</td>
+      <td class="p-2">{{ item.name }}</td>
+      <td class="p-2">{{ item.price }}</td>
+      <td class="p-2">{{ item.image }}</td>
+      <td class="p-2">{{ item.size }}</td>
+      <td class="p-2">{{ item.about }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="3" class="p-2 text-gray-500 text-center">No product yet</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

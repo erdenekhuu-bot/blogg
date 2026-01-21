@@ -63,6 +63,7 @@ module.exports = (appInfo) => {
   config.userConfig = {
     // myAppName: 'egg',
   };
+  config.middleware = ["checkout"];
 
   return {
     ...config,
