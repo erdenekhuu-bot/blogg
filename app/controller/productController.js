@@ -53,6 +53,12 @@ class ProductController extends Controller {
     const result = await this.ctx.service.productService.searchs(name);
     this.ctx.body = result;
   }
+
+  async detail() {
+    const { id } = this.ctx.params;
+    const result = await this.ctx.service.productService.find(id);
+    this.ctx.body = result;
+  }
 }
 
 module.exports = ProductController;

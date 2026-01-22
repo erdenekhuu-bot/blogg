@@ -12,7 +12,6 @@ module.exports = (app) => {
   router.get("/admin/type", controller.admin.home.type);
 
   //api route
-
   router.get(
     "/api/category",
     middleware.checkout(),
@@ -35,6 +34,13 @@ module.exports = (app) => {
     middleware.checkout(),
     controller.productController.list,
   );
+
+  router.get(
+    "/api/product/:id",
+    middleware.checkout(),
+    controller.productController.detail,
+  );
+
   router.get(
     "/api/product/bookmark",
     middleware.checkout(),
