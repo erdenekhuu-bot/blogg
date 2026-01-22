@@ -59,7 +59,7 @@ module.exports = (app) => {
   router.get(
     "/api/subscribe",
     middleware.checkout(),
-    controller.subscribeController.listpackage(),
+    controller.subscribeController.listpackage,
   );
 
   router.post(
