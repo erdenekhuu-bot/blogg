@@ -48,7 +48,9 @@ class ProductService extends Service {
   }
 
   async favoritelist(param) {
-    const records = await this.ctx.model.Product.find({ attribute: param });
+    const records = await this.ctx.model.Product.find({
+      attribute: String(param),
+    });
     return records;
   }
 }

@@ -7,6 +7,11 @@ class SubscribeService extends Service {
     });
     return record;
   }
+
+  async findMany() {
+    const records = await this.ctx.model.Subscribe.find().populate("product");
+    return records;
+  }
 }
 
 module.exports = SubscribeService;

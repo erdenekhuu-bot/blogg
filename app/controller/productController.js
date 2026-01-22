@@ -43,7 +43,7 @@ class ProductController extends Controller {
     this.ctx.body = updatedProduct;
   }
   async favoriteList() {
-    const { param } = this.ctx.queries;
+    const { param } = this.ctx.request.body;
     const result = await this.ctx.service.productService.favoritelist(param);
     this.ctx.body = result;
   }

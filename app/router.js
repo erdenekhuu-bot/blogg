@@ -39,7 +39,7 @@ module.exports = (app) => {
     controller.productController.detail,
   );
 
-  router.get(
+  router.post(
     "/api/product/bookmark",
     middleware.checkout(),
     controller.productController.favoriteList,
@@ -54,6 +54,12 @@ module.exports = (app) => {
     "/api/subscribe",
     middleware.checkout(),
     controller.subscribeController.create,
+  );
+
+  router.get(
+    "/api/subscribe",
+    middleware.checkout(),
+    controller.subscribeController.listpackage(),
   );
 
   router.post(
