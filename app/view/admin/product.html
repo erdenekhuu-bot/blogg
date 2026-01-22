@@ -1,7 +1,7 @@
 {% extends "admin_layout.html" %} {% block title %}Product{% endblock %} {%
 block content %}
 <p class="font-bold text-white">Product page</p>
-<form method="POST" action="/api/product" enctype="multipart/form-data">
+<form method="POST" action="/product" enctype="multipart/form-data">
   <div class="my-4">
     <p class="font-bold text-black">Product name:</p>
     <input type="text" name="name" class="p-2 rounded w-96" required />

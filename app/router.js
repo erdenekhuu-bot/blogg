@@ -9,6 +9,11 @@ module.exports = (app) => {
   router.get("/admin", controller.admin.home.category);
   router.get("/admin/product", controller.admin.home.product);
   router.get("/admin/subscribe", controller.admin.home.subscribe);
+  router.post(
+    "/product",
+    middleware.checkout(),
+    controller.productController.create,
+  );
 
   //api route
   router.get(
@@ -20,12 +25,6 @@ module.exports = (app) => {
     "/api/category",
     middleware.checkout(),
     controller.categoryController.create,
-  );
-
-  router.post(
-    "/api/product",
-    middleware.checkout(),
-    controller.productController.create,
   );
 
   router.get(
