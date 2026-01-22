@@ -49,7 +49,7 @@ class ProductController extends Controller {
   }
 
   async search() {
-    const { name } = this.ctx.queries;
+    const { name } = this.ctx.request.body;
     const result = await this.ctx.service.productService.searchs(name);
     this.ctx.body = result;
   }

@@ -56,7 +56,7 @@ module.exports = (app) => {
     controller.subscribeController.create,
   );
 
-  router.get(
+  router.post(
     "/api/product/search",
     middleware.checkout(),
     controller.productController.search,
