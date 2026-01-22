@@ -58,6 +58,11 @@ module.exports = (appInfo) => {
   };
   config.jwt = {
     secret: process.env.SECRETJWT,
+    // enable: true,
+    // expiresIn: "1h",
+    // sign: {
+    //   expiresIn: "1h",
+    // },
   };
 
   config.userConfig = {
