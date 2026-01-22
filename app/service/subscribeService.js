@@ -1,9 +1,10 @@
 const Service = require("egg").Service;
 
 class SubscribeService extends Service {
-  async create(data) {
-    const { ctx } = this;
-    const record = new ctx.model.Subscribe(data);
+  async create(id) {
+    const record = await this.ctx.model.Subscribe.create({
+      product: id,
+    });
     return record;
   }
 }

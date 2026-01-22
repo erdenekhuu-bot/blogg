@@ -46,6 +46,12 @@ module.exports = (app) => {
     controller.productController.favorite,
   );
 
+  router.patch(
+    "/api/subscribe",
+    middleware.checkout(),
+    controller.subscribeController.create,
+  );
+
   router.get(
     "/api/product/search",
     middleware.checkout(),
