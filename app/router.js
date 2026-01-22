@@ -9,7 +9,6 @@ module.exports = (app) => {
   router.get("/admin", controller.admin.home.category);
   router.get("/admin/product", controller.admin.home.product);
   router.get("/admin/subscribe", controller.admin.home.subscribe);
-  router.get("/admin/type", controller.admin.home.type);
 
   //api route
   router.get(

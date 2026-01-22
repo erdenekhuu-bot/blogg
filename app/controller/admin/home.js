@@ -13,9 +13,6 @@ class AdminHomeController extends Controller {
   async subscribe() {
     await this.ctx.render("admin/subscribe.html");
   }
-  async type() {
-    await this.ctx.render("admin/type.html");
-  }
 }
 
 module.exports = AdminHomeController;

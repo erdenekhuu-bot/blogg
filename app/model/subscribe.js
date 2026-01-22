@@ -5,7 +5,11 @@ module.exports = (app) => {
   return mongoose.model(
     "Subscribe",
     new Schema({
-      product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+        deleteCascade: true,
+      },
     }),
   );
 };

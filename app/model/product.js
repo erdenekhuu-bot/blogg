@@ -6,7 +6,11 @@ module.exports = (app) => {
     "Product",
     new Schema({
       name: String,
-      category: { type: Schema.Types.ObjectId, ref: "Category" },
+      category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+        deleteCascade: true,
+      },
       price: Number,
       image: String,
       size: Number,
